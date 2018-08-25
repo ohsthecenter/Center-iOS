@@ -24,7 +24,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ZK-6p-MQj" customClass="GIDSignInButton">
+                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="0ZK-6p-MQj" customClass="GIDSignInButton">
                                 <rect key="frame" x="20" y="710" width="335" height="48"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -47,10 +47,39 @@
                     <navigationItem key="navigationItem" title="Welcome" id="I8f-Sb-UlH">
                         <barButtonItem key="backBarButtonItem" title="Login" id="qLt-WB-Rgc"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="bnt-sc-bca" kind="presentation" identifier="center" id="C46-Ir-6gA"/>
+                        <segue destination="YHz-w4-Y5L" kind="presentation" identifier="teacher" id="FDF-Sa-nXU"/>
+                        <segue destination="i1e-Hn-Sdo" kind="presentation" identifier="tutor" id="f0X-9O-jYG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1082.4000000000001" y="114.53201970443351"/>
+        </scene>
+        <!--Center-->
+        <scene sceneID="JrA-d8-A3t">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vb0-H1-nwa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Center" id="bnt-sc-bca" sceneMemberID="viewController"/>
+            </objects>
+            <point key="canvasLocation" x="1793" y="115"/>
+        </scene>
+        <!--Teacher-->
+        <scene sceneID="96L-kZ-jc6">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Teacher" id="YHz-w4-Y5L" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kdV-Iv-VVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1668" y="76"/>
+        </scene>
+        <!--Tutor-->
+        <scene sceneID="Gcj-Z4-Wim">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Tutor" id="i1e-Hn-Sdo" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EzF-Fa-aeQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1737" y="163"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sYH-bv-cwC">
