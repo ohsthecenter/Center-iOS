@@ -25,3 +25,28 @@ var identifier: String? {
         return "\(id)"
     } else { return nil }
 }
+
+import GoogleSignIn
+
+func signOut() {
+    do {
+        try Auth.auth().signOut()
+    } catch {
+        print(error.localizedDescription)
+    }
+    GIDSignIn.sharedInstance()?.signOut()
+}
+
+import PKHUD
+
+func showHUD(_ type: HUDContentType) {
+    DispatchQueue.main.async {
+        HUD.show(type)
+    }
+}
+
+func flashHUD(_ type: HUDContentType) {
+    DispatchQueue.main.async {
+        HUD.flash(type)
+    }
+}

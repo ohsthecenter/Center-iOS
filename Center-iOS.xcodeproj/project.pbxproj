@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5232F8EE2132743C00CAD679 /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232F8ED2132743C00CAD679 /* Tutor.swift */; };
+		5232F8F02132790800CAD679 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232F8EF2132790800CAD679 /* SettingsTableViewController.swift */; };
 		52994AE52131249E001A0E7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52994AE42131249E001A0E7A /* GoogleService-Info.plist */; };
 		52994AE721313D22001A0E7A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52994AE621313D22001A0E7A /* Extensions.swift */; };
 		52994AE921313E29001A0E7A /* Center.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52994AE821313E29001A0E7A /* Center.storyboard */; };
 		52994AEB21313EAB001A0E7A /* Tutor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52994AEA21313EAB001A0E7A /* Tutor.storyboard */; };
 		52994AED21313EBA001A0E7A /* Teacher.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52994AEC21313EBA001A0E7A /* Teacher.storyboard */; };
-		52994AF221314D16001A0E7A /* AddTutorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52994AF121314D16001A0E7A /* AddTutorViewController.swift */; };
+		52994AF221314D16001A0E7A /* UpdateTutorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52994AF121314D16001A0E7A /* UpdateTutorViewController.swift */; };
+		52994AF42131CE98001A0E7A /* TutorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52994AF32131CE98001A0E7A /* TutorsTableViewController.swift */; };
+		52994AF62131DB37001A0E7A /* SubjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52994AF52131DB37001A0E7A /* SubjectsTableViewController.swift */; };
+		52994AF921320835001A0E7A /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52994AF821320835001A0E7A /* Subject.swift */; };
 		52E8307B213120550061AF56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E8307A213120550061AF56 /* AppDelegate.swift */; };
 		52E8307D213120550061AF56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E8307C213120550061AF56 /* ViewController.swift */; };
 		52E83080213120550061AF56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52E8307E213120550061AF56 /* Main.storyboard */; };
@@ -22,12 +27,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5232F8ED2132743C00CAD679 /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
+		5232F8EF2132790800CAD679 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		52994AE42131249E001A0E7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		52994AE621313D22001A0E7A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		52994AE821313E29001A0E7A /* Center.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Center.storyboard; sourceTree = "<group>"; };
 		52994AEA21313EAB001A0E7A /* Tutor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutor.storyboard; sourceTree = "<group>"; };
 		52994AEC21313EBA001A0E7A /* Teacher.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Teacher.storyboard; sourceTree = "<group>"; };
-		52994AF121314D16001A0E7A /* AddTutorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTutorViewController.swift; sourceTree = "<group>"; };
+		52994AF121314D16001A0E7A /* UpdateTutorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTutorViewController.swift; sourceTree = "<group>"; };
+		52994AF32131CE98001A0E7A /* TutorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorsTableViewController.swift; sourceTree = "<group>"; };
+		52994AF52131DB37001A0E7A /* SubjectsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsTableViewController.swift; sourceTree = "<group>"; };
+		52994AF821320835001A0E7A /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		52E83077213120550061AF56 /* Center-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Center-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52E8307A213120550061AF56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52E8307C213120550061AF56 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,11 +79,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5232F8F12132801A00CAD679 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				52E8307A213120550061AF56 /* AppDelegate.swift */,
+				52E8307C213120550061AF56 /* ViewController.swift */,
+				5232F8EF2132790800CAD679 /* SettingsTableViewController.swift */,
+				52E8307E213120550061AF56 /* Main.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		52994AEE21314A70001A0E7A /* Center */ = {
 			isa = PBXGroup;
 			children = (
 				52994AE821313E29001A0E7A /* Center.storyboard */,
-				52994AF121314D16001A0E7A /* AddTutorViewController.swift */,
+				52994AF32131CE98001A0E7A /* TutorsTableViewController.swift */,
+				52994AF121314D16001A0E7A /* UpdateTutorViewController.swift */,
+				52994AF52131DB37001A0E7A /* SubjectsTableViewController.swift */,
 			);
 			path = Center;
 			sourceTree = "<group>";
@@ -92,6 +115,16 @@
 				52994AEA21313EAB001A0E7A /* Tutor.storyboard */,
 			);
 			path = Tutor;
+			sourceTree = "<group>";
+		};
+		52994AF7213207BB001A0E7A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				52994AE621313D22001A0E7A /* Extensions.swift */,
+				52994AF821320835001A0E7A /* Subject.swift */,
+				5232F8ED2132743C00CAD679 /* Tutor.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		52E8306E213120550061AF56 = {
@@ -115,10 +148,8 @@
 		52E83079213120550061AF56 /* Center-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				52E8307A213120550061AF56 /* AppDelegate.swift */,
-				52E8307C213120550061AF56 /* ViewController.swift */,
-				52994AE621313D22001A0E7A /* Extensions.swift */,
-				52E8307E213120550061AF56 /* Main.storyboard */,
+				52994AF7213207BB001A0E7A /* Model */,
+				5232F8F12132801A00CAD679 /* Main */,
 				52994AEE21314A70001A0E7A /* Center */,
 				52994AEF21314A82001A0E7A /* Teacher */,
 				52994AF021314A87001A0E7A /* Tutor */,
@@ -248,11 +279,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Center-iOS/Pods-Center-iOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
@@ -264,11 +297,13 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
@@ -289,10 +324,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52994AF42131CE98001A0E7A /* TutorsTableViewController.swift in Sources */,
 				52E8307D213120550061AF56 /* ViewController.swift in Sources */,
-				52994AF221314D16001A0E7A /* AddTutorViewController.swift in Sources */,
+				52994AF921320835001A0E7A /* Subject.swift in Sources */,
+				52994AF221314D16001A0E7A /* UpdateTutorViewController.swift in Sources */,
+				5232F8EE2132743C00CAD679 /* Tutor.swift in Sources */,
 				52994AE721313D22001A0E7A /* Extensions.swift in Sources */,
+				52994AF62131DB37001A0E7A /* SubjectsTableViewController.swift in Sources */,
 				52E8307B213120550061AF56 /* AppDelegate.swift in Sources */,
+				5232F8F02132790800CAD679 /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

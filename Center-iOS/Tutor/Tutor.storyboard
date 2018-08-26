@@ -21,12 +21,24 @@
                         <viewLayoutGuide key="safeArea" id="hRF-wS-L28"/>
                     </view>
                     <navigationItem key="navigationItem" title="Tutor" id="3qf-ic-WIi">
-                        <barButtonItem key="rightBarButtonItem" title="To CENTER" id="hPT-CS-LXl"/>
+                        <barButtonItem key="rightBarButtonItem" title="To CENTER" id="hPT-CS-LXl">
+                            <connections>
+                                <segue destination="Uca-UH-2Cm" kind="presentation" identifier="center" id="d9e-Nq-W3f"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f8H-9A-A4O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="897" y="786"/>
+        </scene>
+        <!--Center-->
+        <scene sceneID="Me1-jh-dZ2">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Center" id="Uca-UH-2Cm" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8oF-zv-Fik" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1482" y="515"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6I3-bh-Hl2">

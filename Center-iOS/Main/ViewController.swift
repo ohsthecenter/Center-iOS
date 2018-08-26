@@ -10,15 +10,9 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
-func signOut() {
-    try? Auth.auth().signOut()
-    GIDSignIn.sharedInstance()?.signOut()
-}
-
 class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
-//        signOut()
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.uiDelegate = self
         navigateAccordingly()

@@ -15,4 +15,6 @@ target 'Center-iOS' do
   pod 'GoogleSignIn'
 
   pod 'Eureka'
+  pod 'DZNEmptyDataSet'
+  pod 'PKHUD'
 end
