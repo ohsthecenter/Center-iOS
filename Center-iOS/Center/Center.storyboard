@@ -82,7 +82,8 @@
                     <connections>
                         <segue destination="O1S-hh-9ZY" kind="relationship" relationship="viewControllers" id="UBH-UT-0Br"/>
                         <segue destination="3Ob-fq-uKL" kind="relationship" relationship="viewControllers" id="DiS-CM-4Rg"/>
-                        <segue destination="P0o-3Y-0Dk" kind="relationship" relationship="viewControllers" id="7mg-w4-agJ"/>
+                        <segue destination="B8Z-HY-lvX" kind="relationship" relationship="viewControllers" id="sno-yq-K9S"/>
+                        <segue destination="P0o-3Y-0Dk" kind="relationship" relationship="viewControllers" id="Ac9-6W-tsW"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7dY-6f-16Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -188,9 +189,58 @@
             </objects>
             <point key="canvasLocation" x="2093.5999999999999" y="1812.5615763546798"/>
         </scene>
+        <!--Teachers-->
+        <scene sceneID="I86-Ob-CbG">
+            <objects>
+                <tableViewController id="RyZ-de-bCh" customClass="TeachersTableViewController" customModule="Center_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="42O-7a-coX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ibc-o3-K90">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ibc-o3-K90" id="3PE-By-ZhA">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="RyZ-de-bCh" id="3pJ-26-wzq"/>
+                            <outlet property="delegate" destination="RyZ-de-bCh" id="q1t-Hi-T2m"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Teachers" id="pvY-UZ-mfe"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Smx-8l-M0I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3036" y="2530.0492610837441"/>
+        </scene>
+        <!--Teachers-->
+        <scene sceneID="xQY-O9-SLL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="B8Z-HY-lvX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Teachers" image="round_local_library_black_36pt" id="Seo-2V-WeL"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="xue-TQ-lF5">
+                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RyZ-de-bCh" kind="relationship" relationship="rootViewController" id="yyD-Vp-yqS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qfR-9M-Xtz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2093.5999999999999" y="2529.3103448275865"/>
+        </scene>
     </scenes>
     <resources>
         <image name="baseline_face_black_36pt" width="108" height="108"/>
+        <image name="round_local_library_black_36pt" width="108" height="108"/>
         <image name="round_school_black_36pt" width="108" height="108"/>
     </resources>
 </document>

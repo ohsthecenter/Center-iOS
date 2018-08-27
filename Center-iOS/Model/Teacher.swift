@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 typealias TeacherList = [String: Teacher]
 
@@ -17,14 +18,51 @@ struct Teacher {
     let role: String
     let prefix: String?
     let room: String?
+    let requests: [DocumentReference]
 }
 
-extension Teacher {
-    func fetchRequests() { }
-}
+import SwiftSoup
 
 extension Teacher {
-    static func fetchAllFromFCPS(then process: @escaping (TeacherList?, Error?) -> Void) {
+    static let base = "https://oaktonhs.fcps.edu/staff-directory"
 
+    /// https://github.com/ohsthecenter/Catalog/blob/master/code/fetch_teacher_info.py
+    static func fetchAllFromFCPS() {
+        let task = URLSession.shared.dataTask(with: URL(string: base)!) { data,_,_ in
+            guard let data = data
+                , let html = String(data: data, encoding: .utf8)
+                , let doc = try? SwiftSoup.parse(html)
+                , let h2 = try? doc.select("h2").last()
+                , let wrapped = try? h2?.text()
+                , let text = wrapped
+                , let index = text.lastIndex(of: " ")
+                else { return }
+            let start = text.index(after: index)
+            let pagesCount = (Int(text[start...])! - 1) / 10
+            (0...pagesCount).forEach(fetchFromFCPS)
+        }
+        task.resume()
+    }
+
+    private static func fetchFromFCPS(ofPage page: Int) {
+        let url = URL(string: "\(base)?&page=\(page)")!
+        let task = URLSession.shared.dataTask(with: url) { data,_,_ in
+            guard let data = data
+                , let html = String(data: data, encoding: .utf8)
+                , let doc = try? SwiftSoup.parse(html)
+                , let trs = try? doc.select("tr")
+                else { return }
+            for tr in trs.dropFirst() {
+                guard let cells = try? tr.select("td").array()
+                    , let nameLinks = try? cells[0].select("a").array()
+                    , let lastName = try? nameLinks[0].text()
+                    , let firstName = try? nameLinks[1].text()
+                    , let position = try? cells[1].text()
+                    , let email = try? cells[2].text()
+                    else { return }
+                print("\(firstName) \(lastName), \(email), \(position)")
+            }
+        }
+        task.resume()
     }
 }

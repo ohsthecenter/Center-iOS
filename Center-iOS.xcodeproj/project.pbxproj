@@ -10,6 +10,7 @@
 		5232F8EE2132743C00CAD679 /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232F8ED2132743C00CAD679 /* Tutor.swift */; };
 		5232F8F02132790800CAD679 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232F8EF2132790800CAD679 /* SettingsTableViewController.swift */; };
 		5232F8F32133DEB700CAD679 /* Teacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232F8F22133DEB500CAD679 /* Teacher.swift */; };
+		5232F8F72134082200CAD679 /* TeachersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232F8F62134082200CAD679 /* TeachersTableViewController.swift */; };
 		52994AE52131249E001A0E7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52994AE42131249E001A0E7A /* GoogleService-Info.plist */; };
 		52994AE721313D22001A0E7A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52994AE621313D22001A0E7A /* Extensions.swift */; };
 		52994AE921313E29001A0E7A /* Center.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52994AE821313E29001A0E7A /* Center.storyboard */; };
@@ -31,6 +32,7 @@
 		5232F8ED2132743C00CAD679 /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
 		5232F8EF2132790800CAD679 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		5232F8F22133DEB500CAD679 /* Teacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teacher.swift; sourceTree = "<group>"; };
+		5232F8F62134082200CAD679 /* TeachersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachersTableViewController.swift; sourceTree = "<group>"; };
 		52994AE42131249E001A0E7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		52994AE621313D22001A0E7A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		52994AE821313E29001A0E7A /* Center.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Center.storyboard; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				52994AF32131CE98001A0E7A /* TutorsTableViewController.swift */,
 				52994AF121314D16001A0E7A /* UpdateTutorViewController.swift */,
 				52994AF52131DB37001A0E7A /* SubjectsTableViewController.swift */,
+				5232F8F62134082200CAD679 /* TeachersTableViewController.swift */,
 			);
 			path = Center;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				52994AE721313D22001A0E7A /* Extensions.swift in Sources */,
 				5232F8F32133DEB700CAD679 /* Teacher.swift in Sources */,
 				52994AF62131DB37001A0E7A /* SubjectsTableViewController.swift in Sources */,
+				5232F8F72134082200CAD679 /* TeachersTableViewController.swift in Sources */,
 				52E8307B213120550061AF56 /* AppDelegate.swift in Sources */,
 				5232F8F02132790800CAD679 /* SettingsTableViewController.swift in Sources */,
 			);
