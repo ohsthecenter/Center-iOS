@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5232F8EE2132743C00CAD679 /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232F8ED2132743C00CAD679 /* Tutor.swift */; };
 		5232F8F02132790800CAD679 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232F8EF2132790800CAD679 /* SettingsTableViewController.swift */; };
+		5232F8F32133DEB700CAD679 /* Teacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232F8F22133DEB500CAD679 /* Teacher.swift */; };
 		52994AE52131249E001A0E7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52994AE42131249E001A0E7A /* GoogleService-Info.plist */; };
 		52994AE721313D22001A0E7A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52994AE621313D22001A0E7A /* Extensions.swift */; };
 		52994AE921313E29001A0E7A /* Center.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52994AE821313E29001A0E7A /* Center.storyboard */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		5232F8ED2132743C00CAD679 /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
 		5232F8EF2132790800CAD679 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		5232F8F22133DEB500CAD679 /* Teacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teacher.swift; sourceTree = "<group>"; };
 		52994AE42131249E001A0E7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		52994AE621313D22001A0E7A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		52994AE821313E29001A0E7A /* Center.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Center.storyboard; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				52994AE621313D22001A0E7A /* Extensions.swift */,
 				52994AF821320835001A0E7A /* Subject.swift */,
 				5232F8ED2132743C00CAD679 /* Tutor.swift */,
+				5232F8F22133DEB500CAD679 /* Teacher.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
@@ -305,6 +309,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
@@ -330,6 +335,7 @@
 				52994AF221314D16001A0E7A /* UpdateTutorViewController.swift in Sources */,
 				5232F8EE2132743C00CAD679 /* Tutor.swift in Sources */,
 				52994AE721313D22001A0E7A /* Extensions.swift in Sources */,
+				5232F8F32133DEB700CAD679 /* Teacher.swift in Sources */,
 				52994AF62131DB37001A0E7A /* SubjectsTableViewController.swift in Sources */,
 				52E8307B213120550061AF56 /* AppDelegate.swift in Sources */,
 				5232F8F02132790800CAD679 /* SettingsTableViewController.swift in Sources */,

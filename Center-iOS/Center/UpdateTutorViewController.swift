@@ -29,21 +29,26 @@ class UpdateTutorViewController: FormViewController {
     private lazy var firstNameRow = NameRow("first") { $0.title = "First Name" }
     private lazy var lastNameRow = NameRow("last") { $0.title = "Last Name" }
     private lazy var roleRow = SegmentedRow("role") {
-        $0.options = Tutor.Role.allCases.map { $0.rawValue }
+        $0.options = Tutor.Role.allCases.map { $0.description }
     }
     private lazy var emailRow = EmailRow("email") { $0.title = "Email" }
+    private var subjectChanged = false
     private lazy var subjectsRow = MultipleSelectorRow<String>("subjects") {
         $0.title = "Pick all subjects comfortable tutoring"
         $0.selectorTitle = "Subjects Tutoring"
         $0.options = []
         $0.value = []
+        }.onChange { [weak self] _ in
+            self?.subjectChanged = true
     }
 
     private var isValid: Bool {
         return idRow.value != nil && idRow.value! > 0
-            && (emailRow.value?.isEmpty != false
-                || emailRow.value!.contains("@")
-                && !emailRow.value!.hasSuffix("fcpsschools.net"))
+            && (firstNameRow.value?.isEmpty == false || firstNameRow.placeholder?.isEmpty == false)
+            && (lastNameRow.value?.isEmpty == false || lastNameRow.placeholder?.isEmpty == false)
+            && roleRow.value != nil
+            && (emailRow.placeholder?.isEmpty == false ||
+                emailRow.value?.isEmpty == false && emailRow.value!.contains("@") && !emailRow.value!.hasSuffix("fcpsschools.net"))
     }
 
     private lazy var submitButton = ButtonRow() {
@@ -63,7 +68,6 @@ class UpdateTutorViewController: FormViewController {
             <<< subjectsRow
             +++ submitButton
         fetchAllSubjects()
-        fillPlaceholderWithID()
     }
 
     // MARK: Retrieve Info
@@ -71,84 +75,97 @@ class UpdateTutorViewController: FormViewController {
     private func fetchAllSubjects() {
         showHUD(.labeledProgress(title: "Loading course list", subtitle: nil))
         Subject.fetchAllFromFirebase { [weak self] (list, error) in
-            guard let list = list else {
-                return flashHUD(.labeledError(
+            guard let list = list, self != nil else {
+                flashHUD(.labeledError(
                     title: "Can't load courses",
                     subtitle: error?.localizedDescription)
                 )
+                return DispatchQueue.main.async { [weak self] in
+                    self?.dismiss(animated: true)
+                }
             }
             let subjects = list.flatMap { $0.value } .map { $0.shortName }
             self?.subjectsRow.options = Set(subjects).sorted()
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
                 self?.subjectsRow.reload()
-                HUD.hide()
+                self?.fillPlaceholderWithID()
             }
+            hideHUD()
         }
     }
 
-    private func placehold<T>(_ row: FieldRow<T>, with placeholder: Any?) {
-        guard let string = placeholder as? String else { return }
-        row.placeholder = string
-        guard row.value == nil else { return }
+    private func placehold<T: _FieldCell<String>>(_ row: FieldRow<T>, with placeholder: String) {
+        row.placeholder = placeholder
+        /*if row.value == nil || row.value!.isEmpty {
+            row.value = placeholder
+        }*/
         row.reload()
     }
 
-    private func placeholdRole(_ role: Any?) {
-        guard roleRow.value == nil, let role = role as? String else { return }
+    private func placeholdRole(_ role: Tutor.Role) {
+        guard roleRow.value == nil else { return }
         roleRow.value = Tutor.Role.map[role]
         roleRow.reload()
     }
 
-    private func placeholdSubjects(_ subjects: Any?) {
-        guard subjectsRow.value == nil
-            , let value = subjects as? [String]
-            else { return }
-        subjectsRow.value = Set(value)
-        subjectsRow.reload()
+    private func placeholdSubjects(_ subjects: [String]) {
+        if subjectsRow.value == nil || subjectsRow.value!.isEmpty {
+            subjectsRow.value = Set(subjects)
+            subjectsRow.reload()
+            subjectChanged = false
+        }
+    }
+
+    private var tutor: Tutor? = nil {
+        didSet {
+            guard let tutor = tutor else { return }
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.placehold(self.firstNameRow, with: tutor.firstName)
+                self.placehold(self.lastNameRow, with: tutor.lastName)
+                self.placehold(self.emailRow, with: tutor.email)
+                self.placeholdRole(tutor.role)
+                self.placeholdSubjects(tutor.subjects)
+            }
+        }
     }
 
     private func fillPlaceholderWithID() {
-        guard id > 0 else { return }
-        db.collection("students").document("\(id)").getDocument { [weak self] (snapshot, _) in
-            guard let self = self, let data = snapshot?.data() else { return }
-            self.placehold(self.firstNameRow, with: data["first_name"])
-            self.placehold(self.lastNameRow, with: data["last_name"])
-            self.placehold(self.emailRow, with: data["email"])
-            self.placeholdRole(data["role"])
-            self.placeholdSubjects(data["subjects"])
+        Tutor.ofID(id) { [weak self] (tutor, error) in
+            guard let tutor = tutor else { return }
+            self?.tutor = tutor
         }
     }
 
-    // MARK: Update Server
+    // MARK: - Update Server
 
     private func submit() {
+        guard isValid else { return }
+        let id = "\(idRow.value!)"
+        let document = db.collection("students").document(id)
+        // MARK: Create New
+        if tutor == nil {
+            let initDict: [String: Any] = [
+                "totalScheduled": 0,
+                "totalAttended": 0,
+                "scheduled": [DocumentReference](),
+                "subjects": [String]()
+            ]
+            document.setData(initDict)
+        }
+        // MARK: Update Existing
         var data: [String: String?] = [
             "email": emailRow.value,
-            "first_name": firstNameRow.value,
-            "last_name": lastNameRow.value
+            "firstName": firstNameRow.value,
+            "lastName": lastNameRow.value
         ]
-        data["role"] = Tutor.Role.map[roleRow.value]
-        let id = "\(idRow.value!)"
+        data["role"] = Tutor.Role.map[roleRow.value!]
         var nonNil = data.filter { $0.value != nil } as [String : Any]
-        if let subjects = subjectsRow.value {
+        if let subjects = subjectsRow.value, subjectChanged {
             nonNil["subjects"] = Array(subjects)
         }
-        let merge = Array(nonNil.keys)
-        nonNil["total_scheduled"] = 0
-        // Update old if needed
-        db.collection("students").document(id).getDocument { [weak self] (snapshot, _) in
-            if let tmp = data["role"], let newRole = tmp {
-                if let oldRole = snapshot?.data()?["role"] as? String,
-                    oldRole != newRole {
-                    db.collection("schedules").document("tutors")
-                        .collection(oldRole).document(id).delete()
-                }
-                db.collection("schedules").document("tutors")
-                    .collection(newRole).document(id).setData([:])
-            }
-            // Insert New
-            db.collection("students").document(id).setData(nonNil, mergeFields: merge)
-            self?.navigationController?.popViewController(animated: true)
-        }
+        document.setData(nonNil, merge: true)
+        // MARK: Exit
+        navigationController?.popViewController(animated: true)
     }
 }

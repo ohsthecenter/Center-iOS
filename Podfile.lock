@@ -124,6 +124,7 @@ PODS:
   - nanopb/encode (0.3.8)
   - PKHUD (5.1.0)
   - Protobuf (3.6.1)
+  - SwiftSoup (1.7.2)
 
 DEPENDENCIES:
   - DZNEmptyDataSet
@@ -133,6 +134,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - GoogleSignIn
   - PKHUD
+  - SwiftSoup
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -160,6 +162,7 @@ SPEC REPOS:
     - nanopb
     - PKHUD
     - Protobuf
+    - SwiftSoup
 
 SPEC CHECKSUMS:
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
@@ -186,7 +189,8 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PKHUD: 62ea46a1e88c4def1da784878d199bb54c841e3c
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  SwiftSoup: e5f61d37e3d802a4b5db81b4945de3da9bfdf115
 
-PODFILE CHECKSUM: 930654bd85b43b631b19c18c6a1168639ce00cf7
+PODFILE CHECKSUM: 1d9697024a6a57a1383a8f31eed2b5fda711f12b
 
 COCOAPODS: 1.5.3

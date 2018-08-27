@@ -50,3 +50,9 @@ func flashHUD(_ type: HUDContentType) {
         HUD.flash(type)
     }
 }
+
+func hideHUD() {
+    DispatchQueue.main.async {
+        HUD.hide()
+    }
+}

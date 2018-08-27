@@ -9,11 +9,17 @@ target 'Center-iOS' do
   use_frameworks!
 
   # Pods for Center-iOS
+
+  ## Network
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'GoogleSignIn'
 
+  ## Model
+  pod 'SwiftSoup'
+
+  ## UI
   pod 'Eureka'
   pod 'DZNEmptyDataSet'
   pod 'PKHUD'

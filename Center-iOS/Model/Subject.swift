@@ -95,7 +95,7 @@ extension Subject {
 import Firebase
 
 extension Subject {
-    private static let subjectsDocument = db.collection("schedules").document("subjects")
+    private static let subjectsDocument = db.collection("info").document("subjects")
     private static let all = subjectsDocument.collection("all")
     private static let categorized = subjectsDocument.collection("categorized")
 

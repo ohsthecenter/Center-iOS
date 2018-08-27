@@ -17,9 +17,7 @@ class SubjectsTableViewController: UITableViewController {
         Subject.fetchAllFromFirebase { [weak self] (list, error) in
             if let list = list, list.count > 0 {
                 self?.list = list
-                DispatchQueue.main.async {
-                    HUD.hide()
-                }
+                hideHUD()
             } else {
                 self?.fetchAllSubjects("")
             }
@@ -31,9 +29,7 @@ class SubjectsTableViewController: UITableViewController {
         Subject.fetchAllFromFCPS { [weak self] (list, error) in
             if let list = list {
                 self?.list = list
-                DispatchQueue.main.async {
-                    HUD.hide()
-                }
+                hideHUD()
             } else {
                 flashHUD(.labeledError(
                     title: "Can't load classes",
