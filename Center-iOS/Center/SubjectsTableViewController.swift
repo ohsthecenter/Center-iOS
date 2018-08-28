@@ -16,8 +16,8 @@ class SubjectsTableViewController: UITableViewController {
         showHUD(.labeledProgress(title: "Loading Classes", subtitle: nil))
         Subject.fetchAllFromFirebase { [weak self] (list, error) in
             if let list = list, list.count > 0 {
+                flashHUD(.success)
                 self?.list = list
-                hideHUD()
             } else {
                 self?.fetchAllSubjects("")
             }
@@ -28,8 +28,8 @@ class SubjectsTableViewController: UITableViewController {
         showHUD(.labeledProgress(title: "Refetching Classes", subtitle: "This may take a while"))
         Subject.fetchAllFromFCPS { [weak self] (list, error) in
             if let list = list {
+                flashHUD(.success)
                 self?.list = list
-                hideHUD()
             } else {
                 flashHUD(.labeledError(
                     title: "Can't load classes",
@@ -41,8 +41,7 @@ class SubjectsTableViewController: UITableViewController {
 
     var list: SubjectList = [:] {
         didSet {
-            subjects = list.enumerated()
-                .map { $0.element }
+            subjects = list.map { ($0.0, $0.1) }
                 .sorted { $0.key < $1.key }
         }
     }
