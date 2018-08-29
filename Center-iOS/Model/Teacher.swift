@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseFirestore
 
 typealias TeacherList = [String: Teacher]
 
@@ -175,7 +175,11 @@ extension Teacher {
 
     static func fetchAll(useCache: Bool = true,
                          then process: @escaping (TeacherList?, Error?) -> Void) {
-        if useCache && hasCache { return process(teachers, nil) }
+        if useCache && hasCache {
+            return DispatchQueue.global().async {
+                process(teachers, nil)
+            }
+        }
         db.collection("teachers").getDocuments { (snapshot, err) in
             guard let documents = snapshot?.documents else { return process(nil, err) }
             guard documents.count > 0 else { return process([:], nil) }

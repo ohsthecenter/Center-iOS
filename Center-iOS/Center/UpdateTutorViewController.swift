@@ -8,22 +8,22 @@
 
 import UIKit
 import Eureka
-import Firebase
+import FirebaseFirestore
 import PKHUD
 
 class UpdateTutorViewController: FormViewController {
-    public var id: Int = 0 {
-        didSet {
-            guard id != oldValue else { return }
-            fillPlaceholderWithID()
-        }
-    }
+    public var id: Int = 0
 
     private lazy var idRow = IntRow("id") {
         $0.title = "Student ID"
         $0.formatter = nil
         }.onChange { [weak self] in
-            self?.id = $0.value ?? self?.id ?? 0
+            guard let self = self
+                , let newValue = $0.value
+                , newValue != self.id
+                else { return }
+            self.id = newValue
+            self.fillPlaceholderWithID()
     }
 
     private lazy var firstNameRow = NameRow("first") { $0.title = "First Name" }
@@ -67,6 +67,9 @@ class UpdateTutorViewController: FormViewController {
             <<< emailRow
             <<< subjectsRow
             +++ submitButton
+        if id > 0 {
+            idRow.value = id
+        }
         fetchAllSubjects()
     }
 
@@ -97,8 +100,8 @@ class UpdateTutorViewController: FormViewController {
     private func placehold<T: _FieldCell<String>>(_ row: FieldRow<T>, with placeholder: String) {
         row.placeholder = placeholder
         /*if row.value == nil || row.value!.isEmpty {
-            row.value = placeholder
-        }*/
+         row.value = placeholder
+         }*/
         row.reload()
     }
 
@@ -141,8 +144,37 @@ class UpdateTutorViewController: FormViewController {
 
     private func submit() {
         guard isValid else { return }
+        showHUD(.labeledProgress(title: "Updating tutor info", subtitle: nil))
         let id = "\(idRow.value!)"
         let document = db.collection("students").document(id)
+        func updateExisting() {
+            var data: [String: String?] = [
+                "email": emailRow.value,
+                "firstName": firstNameRow.value,
+                "lastName": lastNameRow.value
+            ]
+            data["role"] = Tutor.Role.map[roleRow.value!]
+            var nonNil = data.filter { $0.value != nil } as [String : Any]
+            if let subjects = subjectsRow.value, subjectChanged {
+                nonNil["subjects"] = Array(subjects)
+            }
+            document.setData(nonNil, merge: true) { [weak self] error in
+                // MARK: Exit
+                if let error = error {
+                    flashHUD(.labeledError(
+                        title: "Can't update tutor info",
+                        subtitle: error.localizedDescription)
+                    )
+                } else {
+                    guard let nav = self?.navigationController else {
+                        return hideHUD()
+                    }
+                    #warning("Bad code. Please refactor")
+                    (nav.viewControllers.dropLast().last as! TutorsTableViewController).reload()
+                    nav.popViewController(animated: true)
+                }
+            }
+        }
         // MARK: Create New
         if tutor == nil {
             let initDict: [String: Any] = [
@@ -151,21 +183,16 @@ class UpdateTutorViewController: FormViewController {
                 "scheduled": [DocumentReference](),
                 "subjects": [String]()
             ]
-            document.setData(initDict)
+            document.setData(initDict) { error in
+                if let error = error {
+                    flashHUD(.labeledError(
+                        title: "Can't create tutor",
+                        subtitle: error.localizedDescription)
+                    )
+                } else {
+                    updateExisting()
+                }
+            }
         }
-        // MARK: Update Existing
-        var data: [String: String?] = [
-            "email": emailRow.value,
-            "firstName": firstNameRow.value,
-            "lastName": lastNameRow.value
-        ]
-        data["role"] = Tutor.Role.map[roleRow.value!]
-        var nonNil = data.filter { $0.value != nil } as [String : Any]
-        if let subjects = subjectsRow.value, subjectChanged {
-            nonNil["subjects"] = Array(subjects)
-        }
-        document.setData(nonNil, merge: true)
-        // MARK: Exit
-        navigationController?.popViewController(animated: true)
     }
 }

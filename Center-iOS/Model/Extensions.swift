@@ -6,11 +6,13 @@
 //  Copyright © 2018 OHS The Center. All rights reserved.
 //
 
-import Firebase
+let centerEmail = "ohsthecenter@gmail.com"
+
+import FirebaseFirestore
 
 let db = Firestore.firestore()
 
-let centerEmail = "ohsthecenter@gmail.com"
+import Firebase
 
 var signedIn: Bool {
     return Auth.auth().currentUser != nil

@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="cQT-tF-ZiK" style="IBUITableViewCellStyleDefault" id="x8A-Sd-Agi">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="tutor" textLabel="cQT-tF-ZiK" detailTextLabel="fLL-kP-qNV" style="IBUITableViewCellStyleSubtitle" id="x8A-Sd-Agi">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x8A-Sd-Agi" id="ok6-Oz-clo">
@@ -27,9 +27,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cQT-tF-ZiK">
-                                            <rect key="frame" x="16" y="0.0" width="324" height="43.666666666666664"/>
+                                            <rect key="frame" x="16.000000000000004" y="5" width="33.333333333333336" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fLL-kP-qNV">
+                                            <rect key="frame" x="15.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -45,7 +52,7 @@
                     <navigationItem key="navigationItem" title="Tutors" id="zaY-0r-q0g">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="LTj-k4-Nge">
                             <connections>
-                                <segue destination="20k-Yd-5xW" kind="show" id="4iG-wL-g9i"/>
+                                <segue destination="20k-Yd-5xW" kind="show" identifier="updateTutorInfo" id="4iG-wL-g9i"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -161,7 +168,7 @@
                     <navigationItem key="navigationItem" title="Subjects" id="yeS-lW-NEM">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="gIQ-Qa-Eoj">
                             <connections>
-                                <action selector="fetchAllSubjects:" destination="IpR-ke-KNH" id="ked-W9-Jpf"/>
+                                <action selector="refetchAllSubjectsFromFCPS:" destination="IpR-ke-KNH" id="5GY-NA-piq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -231,7 +238,7 @@
                     <navigationItem key="navigationItem" title="Teachers" id="pvY-UZ-mfe">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="j3K-jj-0tN">
                             <connections>
-                                <action selector="reload:" destination="RyZ-de-bCh" id="Avo-lY-zLN"/>
+                                <action selector="refetchAllTeachersFromFCPS:" destination="RyZ-de-bCh" id="DGN-5i-chr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

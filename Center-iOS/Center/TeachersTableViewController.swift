@@ -19,19 +19,16 @@ class TeachersTableViewController: UITableViewController, FCPSTeacherFetchDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        showHUD(progress)
-        fetchFromFirebase(loadFCPSIfEmpty: true)
+        reload(useCache: true)
     }
 
-    @IBAction func reload(_ sender: Any) {
-        fetchFromFCPS()
+    func reload(useCache: Bool = false) {
+        showHUD(progress)
+        fetchFromFirebase(useCache: useCache, loadFCPSIfEmpty: true)
     }
 
     private func fetchFromFirebase(useCache: Bool = true, loadFCPSIfEmpty: Bool) {
-        showHUD(.labeledProgress(
-            title: "Loading teacher list",
-            subtitle: (useCache ? "We're using cache to save your data" : nil))
-        )
+        showHUD(progress)
         Teacher.fetchAll(useCache: useCache) { [weak self] (list, error) in
             guard let list = list else {
                 return flashHUD(.labeledError(
@@ -41,7 +38,7 @@ class TeachersTableViewController: UITableViewController, FCPSTeacherFetchDelega
             }
             guard let self = self else { return }
             if list.isEmpty && loadFCPSIfEmpty {
-                self.fetchFromFCPS()
+                self.refetchAllTeachersFromFCPS("")
             } else {
                 flashHUD(.success)
                 self.teachersList = list
@@ -49,7 +46,7 @@ class TeachersTableViewController: UITableViewController, FCPSTeacherFetchDelega
         }
     }
 
-    private func fetchFromFCPS() {
+    @IBAction private func refetchAllTeachersFromFCPS(_ sender: Any) {
         showHUD(.labeledProgress(title: "Reloading teacher list from FCPS", subtitle: nil))
         Teacher.delegate = self
         Teacher.fetchAllFromFCPS()
@@ -129,5 +126,4 @@ class TeachersTableViewController: UITableViewController, FCPSTeacherFetchDelega
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-
 }
