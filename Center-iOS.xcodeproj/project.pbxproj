@@ -86,10 +86,11 @@
 		5232F8F12132801A00CAD679 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				52E8307A213120550061AF56 /* AppDelegate.swift */,
 				52E8307C213120550061AF56 /* ViewController.swift */,
 				5232F8EF2132790800CAD679 /* SettingsTableViewController.swift */,
 				52E8307E213120550061AF56 /* Main.storyboard */,
+				52E8307A213120550061AF56 /* AppDelegate.swift */,
+				52E83083213120580061AF56 /* LaunchScreen.storyboard */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -160,7 +161,6 @@
 				52994AEF21314A82001A0E7A /* Teacher */,
 				52994AF021314A87001A0E7A /* Tutor */,
 				52E83081213120580061AF56 /* Assets.xcassets */,
-				52E83083213120580061AF56 /* LaunchScreen.storyboard */,
 				52E83086213120580061AF56 /* Info.plist */,
 				52994AE42131249E001A0E7A /* GoogleService-Info.plist */,
 			);

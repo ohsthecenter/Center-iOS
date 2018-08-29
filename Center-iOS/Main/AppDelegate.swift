@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             url,
             sourceApplication: options[.sourceApplication] as? String,
             annotation: [:]
-        )
+        ) // && possibleFutureHandlers
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

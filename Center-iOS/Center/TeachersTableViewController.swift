@@ -10,9 +10,7 @@ import UIKit
 import PKHUD
 
 class TeachersTableViewController: UITableViewController, FCPSTeacherFetchDelegate {
-
     // MARK: - Getting Data
-
     private let progress = HUDContentType.labeledProgress(
         title: "Loading teacher list", subtitle: nil
     )
@@ -47,7 +45,7 @@ class TeachersTableViewController: UITableViewController, FCPSTeacherFetchDelega
     }
 
     @IBAction private func refetchAllTeachersFromFCPS(_ sender: Any) {
-        showHUD(.labeledProgress(title: "Reloading teacher list from FCPS", subtitle: nil))
+        showHUD(.labeledProgress(title: "Refetching teachers list", subtitle: nil))
         Teacher.delegate = self
         Teacher.fetchAllFromFCPS()
     }
@@ -55,7 +53,7 @@ class TeachersTableViewController: UITableViewController, FCPSTeacherFetchDelega
     func onError(_ error: Error?) {
         DispatchQueue.main.async {
             HUD.flash(.labeledError(
-                title: "Can't fetch teacher list from FCPS",
+                title: "Can't fetch teachers list from FCPS",
                 subtitle: error?.localizedDescription
             ), delay: 0) { [weak self] in
                 guard $0, let self = self else { return }
@@ -70,7 +68,7 @@ class TeachersTableViewController: UITableViewController, FCPSTeacherFetchDelega
     }
 
     func onMerging() {
-        showHUD(.labeledProgress(title: "Processing teacher list", subtitle: nil))
+        showHUD(.labeledProgress(title: "Processing teachers list", subtitle: nil))
     }
 
     func onSuccess() {

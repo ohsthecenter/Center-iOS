@@ -134,19 +134,18 @@ class UpdateTutorViewController: FormViewController {
     }
 
     private func fillPlaceholderWithID() {
-        Tutor.ofID(id) { [weak self] (tutor, error) in
-            guard let tutor = tutor else { return }
+        Tutor.ofID(id) { [weak self] tutor, _ in
             self?.tutor = tutor
         }
     }
 
     // MARK: - Update Server
 
+    #warning("Need to refactor model code out of controller")
     private func submit() {
         guard isValid else { return }
         showHUD(.labeledProgress(title: "Updating tutor info", subtitle: nil))
-        let id = "\(idRow.value!)"
-        let document = db.collection("students").document(id)
+        let document = db.collection("students").document("\(id)")
         func updateExisting() {
             var data: [String: String?] = [
                 "email": emailRow.value,
@@ -175,23 +174,26 @@ class UpdateTutorViewController: FormViewController {
                 }
             }
         }
+        guard tutor == nil else {
+            return updateExisting()
+        }
         // MARK: Create New
-        if tutor == nil {
-            let initDict: [String: Any] = [
-                "totalScheduled": 0,
-                "totalAttended": 0,
-                "scheduled": [DocumentReference](),
-                "subjects": [String]()
-            ]
-            document.setData(initDict) { error in
-                if let error = error {
-                    flashHUD(.labeledError(
-                        title: "Can't create tutor",
-                        subtitle: error.localizedDescription)
-                    )
-                } else {
-                    updateExisting()
-                }
+        let initDict: [String: Any] = [
+            "id": id,
+            "type": "tutor",
+            "totalScheduled": 0,
+            "totalAttended": 0,
+            "scheduled": [DocumentReference](),
+            "subjects": [String]()
+        ]
+        document.setData(initDict) { error in
+            if let error = error {
+                flashHUD(.labeledError(
+                    title: "Can't create tutor",
+                    subtitle: error.localizedDescription)
+                )
+            } else {
+                updateExisting()
             }
         }
     }

@@ -12,6 +12,9 @@ import FirebaseFirestore
 typealias TeacherList = [String: Teacher]
 
 struct Teacher {
+    /// Firebase assigned UID
+    let uid: String?
+    /// fcps.edu account
     let id: String
     let firstName: String
     let lastName: String
@@ -20,9 +23,10 @@ struct Teacher {
     let room: String?
     let requests: [DocumentReference]
 
-    init(id: String, firstName: String, lastName: String, role: String,
+    init(uid: String?, id: String, firstName: String, lastName: String, role: String,
          prefix: String? = nil, room: String? = nil,
          requests: [DocumentReference] = []) {
+        self.uid = uid
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
@@ -53,6 +57,7 @@ extension Teacher {
             if hasError {
                 delegate?.onAbort()
             } else {
+                delegate?.onMerging()
                 mergeFCPSWithFirebase()
             }
         }
@@ -66,19 +71,13 @@ extension Teacher {
         let task = URLSession.shared.dataTask(with: URL(string: base)!) { data,_,err in
             guard let data = data
                 , let html = String(data: data, encoding: .utf8)
-                else {
-                    delegate?.onError(err)
-                    return hasError = true
-            }
+                else { delegate?.onError(err);return hasError = true }
             do {
                 let doc = try SwiftSoup.parse(html)
                 let h2 = try doc.select("h2").last()
                 guard let text = try h2?.text()
                     , let index = text.lastIndex(of: " ")
-                    else {
-                    delegate?.onError(nil)
-                    return
-                }
+                    else { delegate?.onError(nil);return }
                 let start = text.index(after: index)
                 // If we don't have a total number last,
                 // this needs refactoring
@@ -117,10 +116,13 @@ extension Teacher {
                     // If there is @ in email address, they have some problems
                     let index = email.lastIndex(of: "@")!
                     let id = "\(email[..<index])"
-                    teachers[id] = Teacher(id: id,
-                                           firstName: firstName,
-                                           lastName: lastName,
-                                           role: position)
+                    teachers[id] = Teacher(
+                        uid: nil,
+                        id: id,
+                        firstName: firstName,
+                        lastName: lastName,
+                        role: position
+                    )
                 }
             } catch {
                 delegate?.onError(error)
@@ -136,11 +138,15 @@ extension Teacher {
                 delegate?.onError(error)
                 return
             }
+            // MARK: Update Existing
             for document in documents {
-                let ref = db.collection("teachers").document(document.documentID)
-                if let teacher = teachers[document.documentID] {
+                let id = document.documentID
+                let ref = db.collection("teachers").document(id)
+                if let teacher = teachers[id] {
                     let data = document.data()
                     let current = [
+                        "id": id,
+                        "type": "teacher",
                         "firstName": teacher.firstName,
                         "lastName": teacher.lastName,
                         "role": teacher.role
@@ -154,9 +160,12 @@ extension Teacher {
                     ref.delete()
                 }
             }
+            // MARK: Create New
             for (id, teacher) in teachers {
                 let ref = db.collection("teachers").document(id)
                 let current = [
+                    "id": id,
+                    "type": "teacher",
                     "firstName": teacher.firstName,
                     "lastName": teacher.lastName,
                     "role": teacher.role
@@ -191,10 +200,11 @@ extension Teacher {
                     , let lastName = data["lastName"] as? String
                     , let role = data["role"] as? String
                     else {
-                        print("ERROR: Can't parse \(id)")
+                        logError("Can't parse \(id)@fcps.edu")
                         continue
                 }
                 teachers[id] = Teacher(
+                    uid: data["uid"] as? String,
                     id: id,
                     firstName: firstName,
                     lastName: lastName,

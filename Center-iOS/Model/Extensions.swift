@@ -22,10 +22,35 @@ var email: String? {
     return Auth.auth().currentUser?.email
 }
 
+enum AccountType {
+    case center, tutor, teacher
+}
+
+extension String {
+    var emailToAccount: String? {
+        if let id = split(separator: "@").first {
+            return "\(id)"
+        } else { return nil }
+    }
+
+    var emailToAccountType: AccountType? {
+        if self == centerEmail {
+            return .center
+        } else if hasSuffix("@fcps.edu") {
+            return .teacher
+        } else if hasSuffix("@fcpsschools.net") && Int(emailToAccount!) != nil {
+            return .tutor
+        }
+        return nil
+    }
+}
+
 var identifier: String? {
-    if let id = email?.split(separator: "@").first {
-        return "\(id)"
-    } else { return nil }
+    return email?.emailToAccount
+}
+
+var accountType: AccountType? {
+    return email?.emailToAccountType
 }
 
 import GoogleSignIn
@@ -34,7 +59,7 @@ func signOut() {
     do {
         try Auth.auth().signOut()
     } catch {
-        print(error.localizedDescription)
+        logError(error.localizedDescription)
     }
     GIDSignIn.sharedInstance()?.signOut()
 }
@@ -57,4 +82,8 @@ func hideHUD() {
     DispatchQueue.main.async {
         HUD.hide()
     }
+}
+
+func logError(_ why: String) {
+    print("ERROR: \(why)")
 }

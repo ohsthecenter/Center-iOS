@@ -12,6 +12,9 @@ import FirebaseFirestore
 typealias TutorList = [Int: Tutor]
 
 struct Tutor {
+    /// Firebase assigned UID
+    let uid: String?
+    /// fcpsschools.net account
     let id: Int
     let email: String
     let firstName: String
@@ -55,8 +58,9 @@ extension Tutor {
 }
 
 extension Tutor {
-    init?(id: Int, firData data: [String: Any]) {
-        guard let firstName = data["firstName"] as? String
+    init?(firData data: [String: Any]) {
+        guard let id = data["id"] as? Int
+            , let firstName = data["firstName"] as? String
             , let lastName = data["lastName"] as? String
             , let email = data["email"] as? String
             , let rawRole = data["role"] as? String
@@ -67,6 +71,7 @@ extension Tutor {
             , let totalAttended = data["totalAttended"] as? Int
             else { return nil }
         self.init(
+            uid: data["uid"] as? String,
             id: id,
             email: email,
             firstName: firstName,
@@ -93,7 +98,7 @@ extension Tutor {
         if hasCache && useCache { return process(list[id], nil) }
         db.collection("students").document("\(id)").getDocument { (snapshot, err) in
             guard let data = snapshot?.data()
-                , let tutor = Tutor(id: id, firData: data)
+                , let tutor = Tutor(firData: data)
                 else { return process(nil, err) }
             process(tutor, nil)
         }
@@ -117,9 +122,9 @@ extension Tutor {
             list = [:]
             for document in documents {
                 guard let id = Int(document.documentID)
-                    , let tutor = Tutor(id: id, firData: document.data())
+                    , let tutor = Tutor(firData: document.data())
                     else {
-                        print("Error: Tutor #\(document.documentID) is ill formed")
+                        logError("Tutor #\(document.documentID) is ill formed")
                         continue
                 }
                 list[id] = tutor
